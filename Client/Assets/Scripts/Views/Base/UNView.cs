@@ -6,7 +6,7 @@
 
 using System;
 
-public class UNController
+public class UNView:UNBaseView
 {
 }
 

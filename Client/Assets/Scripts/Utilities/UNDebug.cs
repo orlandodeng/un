@@ -9,10 +9,9 @@ using System;
 
 public class UNDebug
 {
-    public static readonly bool SHOWLOG = true;
     public static void Log(string str)
     {
-        if(!SHOWLOG)
+        if(!UNConstants.SHOWLOG)
         {
             return;
         }
@@ -21,7 +20,7 @@ public class UNDebug
 
     public static void LogWarning(string str)
     {
-        if(!SHOWLOG)
+        if(!UNConstants.SHOWLOG)
         {
             return;
         }
@@ -30,7 +29,7 @@ public class UNDebug
 
     public static void LogError(string str)
     {
-        if(!SHOWLOG)
+        if(!UNConstants.SHOWLOG)
         {
             return;
         }

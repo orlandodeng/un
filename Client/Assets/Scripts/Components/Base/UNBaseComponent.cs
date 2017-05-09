@@ -1,15 +1,11 @@
 ﻿//========================================================================
 // Copyright(C): UN
 // Created by : dhf at 2017/4/19 15:47:00
-// Function : 每个脚本需要继承的基类
+// Function : 
 //========================================================================
 
 using UnityEngine;
 
-public class UNBaseComponent:MonoBehaviour
+public class UNBaseComponent:UNObject
 {
-
-    public virtual void Init()
-    {
-    }
 }

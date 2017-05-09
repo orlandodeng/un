@@ -6,7 +6,7 @@
 
 using System;
 
-public class UNModel
+public class UNModel:UNBaseModel
 {
 }
 
