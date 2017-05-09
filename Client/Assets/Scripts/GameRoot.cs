@@ -10,7 +10,7 @@ using UnityEngine;
 public class GameRoot : MonoBehaviour
 {
 
-	private UNDictionary<Type, UNBaseManager> m_managers = new UNDictionary<Type, UNBaseManager> ();
+	private UNDictionary<Type, UNManager> m_managers = new UNDictionary<Type, UNManager> ();
 
 	// Use this for initialization
 	private void Start ()
@@ -34,7 +34,7 @@ public class GameRoot : MonoBehaviour
 	}
 
 	private void LoadGameManager<T> ()
-        where T:UNBaseManager, new()
+        where T:UNManager, new()
 	{
 		var mgr = new T ();
 		m_managers.Add (typeof(T), mgr);
@@ -43,7 +43,7 @@ public class GameRoot : MonoBehaviour
 
 	private void LoadGameManagers ()
 	{
-		LoadGameManager<UNEventManager> ();
+		LoadGameManager<EventManager> ();
 	}
 
 	private void LoadLogicSystems ()

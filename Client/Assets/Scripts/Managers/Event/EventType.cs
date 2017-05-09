@@ -1,13 +1,10 @@
 ﻿//========================================================================
 // Copyright(C): EZFun
-// Created by : dhf at 2017/4/20 20:49:05
-// Function : 
+// Created by : dhf at 2017/4/20 12:16:39
+// Function : 事件类型
 //========================================================================
 
-using UnityEngine;
-using System;
 
-public class UNObject:UNBaseObject
+public class EventType
 {
-    protected EventObjecct m_event;
 }

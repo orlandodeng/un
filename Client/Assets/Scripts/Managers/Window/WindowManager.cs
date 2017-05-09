@@ -1,10 +1,12 @@
 ﻿//========================================================================
 // Copyright(C): EZFun
-// Created by : dhf at 2017/4/20 12:16:39
-// Function : 事件类型
+// Created by : dhf at 2017/5/9 17:35:59
+// Function : 
 //========================================================================
 
+using UnityEngine;
+using System;
 
-public class UNEventType
+public class WindowManager:UNManager
 {
 }

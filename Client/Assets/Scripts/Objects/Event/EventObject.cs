@@ -7,23 +7,24 @@
 using UnityEngine;
 using System;
 
-public class UNEventObjecct:UNBaseObject
+public delegate void EventCallBack(params object[] pars);
+public class EventObjecct:UNObject
 {
-    public UNDictionary<UNEventType, UNList<UNEventCallBack>> m_listeners = new UNDictionary<UNEventType, UNList<UNEventCallBack>>();
-    public UNDictionary<UNEventType, UNList<object[]>> m_triggers = new UNDictionary<UNEventType, UNList<object[]>>();
+    public UNDictionary<EventType, UNList<EventCallBack>> m_listeners = new UNDictionary<EventType, UNList<EventCallBack>>();
+    public UNDictionary<EventType, UNList<object[]>> m_triggers = new UNDictionary<EventType, UNList<object[]>>();
 
-    public void AddEventListener(UNEventType type, UNEventCallBack cb)
+    public void AddEventListener(EventType type, EventCallBack cb)
     {
-        UNList<UNEventCallBack> cbs = null;
+        UNList<EventCallBack> cbs = null;
         if (!m_listeners.TryGetValue(type, out cbs))
         {
-            cbs = new UNList<UNEventCallBack>();
+            cbs = new UNList<EventCallBack>();
             m_listeners.Add(type, cbs);
         }
         cbs.Add(cb);
     }
 
-    public void DispatchEvent(UNEventType type, object[] pars)
+    public void DispatchEvent(EventType type, object[] pars)
     {
         UNList<object[]> objs = null;
         if (!m_triggers.TryGetValue(type, out objs))
@@ -34,7 +35,7 @@ public class UNEventObjecct:UNBaseObject
         objs.Add(pars);
     }
 
-    public void DispatchEventImmediate(UNEventType type, object[] pars)
+    public void DispatchEventImmediate(EventType type, object[] pars)
     {
         if (!m_listeners.ContainsKey(type))
         {
@@ -54,7 +55,7 @@ public class UNEventObjecct:UNBaseObject
         }
     }
 
-    protected override void Update()
+    public new void Update()
     {
         for (int i = 0; i < m_triggers.Count; ++i)
         {

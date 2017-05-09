@@ -1,13 +1,12 @@
 ﻿//========================================================================
 // Copyright(C): EZFun
-// Created by : dhf at 2017/4/20 20:49:05
-// Function : 
+// Created by : dhf at 2017/5/9 17:39:55
+// Function : 表格管理
 //========================================================================
 
 using UnityEngine;
 using System;
 
-public class UNObject:UNBaseObject
+public class TableManager:UNManager
 {
-    protected EventObjecct m_event;
 }

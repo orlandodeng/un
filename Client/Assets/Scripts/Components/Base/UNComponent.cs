@@ -10,7 +10,7 @@ using System;
 public class UNComponent:UNBaseComponent
 {
     // 拥有的行为
-    public UNDictionary<UNBehaviorType, UNBaseBehavior> m_behaviours;
+    public UNDictionary<UNBehaviorType, UNBehavior> m_behaviours;
     // 行为转换规则
     public UNDictionary<UNList<UNBehaviorType>, UNBehaviorType> m_behavioursTrans;
 }
