@@ -10,7 +10,16 @@ using System;
 public class UNComponent:UNBaseComponent
 {
     // 拥有的行为
-    public UNDictionary<UNBehaviorType, UNBehavior> m_behaviours;
+    private UNList<UNBehavior> m_behaviors = new UNList<UNBehavior>();
     // 行为转换规则
-    public UNDictionary<UNList<UNBehaviorType>, UNBehaviorType> m_behavioursTrans;
+    private UNDictionary<UNList<UNBehaviorType>, UNBehaviorType> m_behaviorsTrans = new UNDictionary<UNList<UNBehaviorType>, UNBehaviorType>();
+    // 待激活行为
+    private UNList<UNBehavior> m_behaviorsWaitForActive = new UNList<UNBehavior>();
+    // 当前行为
+    public UNBehaviorType m_curBehavour;
+
+    public override void Init()
+    {
+        base.Init();
+    }
 }
