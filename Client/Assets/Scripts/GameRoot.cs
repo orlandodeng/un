@@ -44,6 +44,8 @@ public class GameRoot : MonoBehaviour
 	private void LoadGameManagers ()
 	{
 		LoadGameManager<EventManager> ();
+		LoadGameManager<TableManager> ();
+        var v = TableManager.Instance.GetEntry<un_resource.ResBehaviorList>(1) as un_resource.ResBehavior;
 	}
 
 	private void LoadLogicSystems ()
