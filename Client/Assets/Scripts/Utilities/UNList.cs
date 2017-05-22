@@ -71,6 +71,20 @@ public class UNList<T>
         }
     }
 
+    public void Insert(int index, T value)
+    {
+        m_list.Insert(index, value);
+        if (m_addCB != null)
+        {
+            m_addCB(value);
+        }
+    }
+
+    public void Push(T value)
+    {
+        Add(value);
+    }
+
     public void SetCallBack(Action<T> addCB, Action<T> removeCB)
     {
         m_addCB = addCB;
@@ -102,6 +116,13 @@ public class UNList<T>
         {
             m_list.RemoveAt(index);
         }
+    }
+
+    public T Pop()
+    {
+        var value = m_list[0];
+        RemoveAt(0);
+        return value;
     }
 
     //public int RemoveAll(Predicate<T> match)
