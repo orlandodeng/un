@@ -1,0 +1,16 @@
+
+{
+	"proto" : "un_resource_pb2",
+	"exclude" : ["备注说明","备注","备份","填表"],
+	"check_dup_key" : true,
+	"excels":[
+	    {
+			"struct" : "ResBehaviorList",
+			"file" : ["Behavior.xls"],
+			"toLua" : false,
+			"toPb" : false,
+			"titleCol" : 1,
+			"startCol" : 2
+		}
+	]
+}

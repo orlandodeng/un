@@ -1,0 +1,16 @@
+package un_resource;
+
+message ResBehaviorList
+{
+    repeated ResBehavior list       = 1;
+}
+message ResBehaviorTrans
+{
+	required int32 from = 1;
+	required int32 to 	= 2;
+}
+message ResBehavior
+{
+    required int32       			ID 	    	= 1;
+	repeated ResBehaviorTrans       trans       = 2;
+}
