@@ -13,9 +13,9 @@ public class UNValue
     private UNValue()
 	{
 	}
-	private static byte[] keys = {0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF};
-	private static string keyUser = "12345678";
-	private static string keyDe ="12345678";
+	//private static byte[] keys = {0x12, 0x34, 0x56, 0x78, 0x90, 0xAB, 0xCD, 0xEF};
+	//private static string keyUser = "12345678";
+	//private static string keyDe ="12345678";
 	public static bool m_isEncode = false;
 
     private static byte[] encryBytes = null;
@@ -200,10 +200,10 @@ public class UNValue
     }
 
 
-	public static int GetIntValue(string src)
-	{
-		return int.Parse(DecryptDES(src));
-	}
+	//public static int GetIntValue(string src)
+	//{
+	//	return int.Parse(DecryptDES(src));
+	//}
 
 	public static void GetDeLs(List<UNValueInt> ls, ref List<int> returnLs)
 	{

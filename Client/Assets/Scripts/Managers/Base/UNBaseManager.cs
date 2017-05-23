@@ -25,7 +25,7 @@ public class UNBaseManager:UNObject
     {
     }
 
-    protected override void Update()
+    public override void Update()
     {
     }
 }

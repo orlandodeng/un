@@ -12,7 +12,7 @@ public class UNBaseObject
     public virtual void Init()
     { }
 
-    protected virtual void Update()
+    public virtual void Update()
     { }
 
     public virtual void Destroy()

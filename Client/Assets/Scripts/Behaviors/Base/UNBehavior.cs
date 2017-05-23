@@ -15,35 +15,73 @@ public enum UNBehaviorStateType
     Execute,
     Finish
 }
+
+public delegate bool UNBehaviorCanChangeToState();
+public delegate void UNBehaviorChangeToState();
+public delegate void UNBehaviorChangeStateCallBack(UNBehaviorType bType, UNBehaviorStateType fromState, UNBehaviorStateType toState);
 public class UNBehavior:UNBaseBehavior
 {
-    private UNBehaviorType m_type;
-    private int m_priority;
-    private UNBehaviorStateType m_curState;
-    private Action<UNBehaviorStateType, UNBehaviorStateType> m_cbBeforeChange = null;
-    private Action<UNBehaviorStateType, UNBehaviorStateType> m_cbAfterChange = null;
-    private UNDictionary<UNBehaviorStateType, Action> m_stateCbs = new UNDictionary<UNBehaviorStateType, Action>();
+    private UNBehaviorType _m_type;
+    public UNBehaviorType m_type
+    {
+        get
+        {
+            return _m_type;
+        }
+        set
+        {
+            _m_type = value;
+        }
+    }
+    private int _m_priority;
+    public int m_priority
+    {
+        get
+        {
+            return _m_priority;
+        }
+        set
+        {
+            _m_priority = value;
+        }
+    }
+    private UNBehaviorStateType _m_curState;
+    public UNBehaviorStateType m_curState
+    {
+        get
+        {
+            return _m_curState;
+        }
+        set
+        {
+            _m_curState = value;
+        }
+    }
+    private UNList<UNBehaviorChangeStateCallBack> m_cbsBeforeChange = null;
+    private UNList<UNBehaviorChangeStateCallBack> m_cbsAfterChange = null;
+    private UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState> m_stateCheckCbs = new UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState>();
+    private UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState> m_stateCbs = new UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState>();
 
     public UNBehavior(UNBehaviorType bType, 
         int priority = 0,
         UNBehaviorStateType bState = UNBehaviorStateType.Wait,
-        Action<UNBehaviorStateType, UNBehaviorStateType> actionBeforeChange = null,
-        Action<UNBehaviorStateType, UNBehaviorStateType> actionAfterChange = null)
+        UNList<UNBehaviorChangeStateCallBack> cbsBeforeChange = null,
+        UNList<UNBehaviorChangeStateCallBack> cbsAfterChange = null)
     {
-        ResetToBehavior(bType, priority, bState, actionBeforeChange, actionAfterChange);
+        ResetToBehavior(bType, priority, bState, cbsBeforeChange, cbsAfterChange);
     }
 
     public void ResetToBehavior(UNBehaviorType bType, 
         int priority = 0,
         UNBehaviorStateType bState = UNBehaviorStateType.Wait,
-        Action<UNBehaviorStateType, UNBehaviorStateType> actionBeforeChange = null,
-        Action<UNBehaviorStateType, UNBehaviorStateType> actionAfterChange = null)
+        UNList<UNBehaviorChangeStateCallBack> cbsBeforeChange = null,
+        UNList<UNBehaviorChangeStateCallBack> cbsAfterChange = null)
     {
         m_type = bType;
         m_priority = priority;
         m_curState = bState;
-        m_cbBeforeChange = actionBeforeChange;
-        m_cbAfterChange = actionAfterChange;
+        m_cbsBeforeChange = cbsBeforeChange;
+        m_cbsAfterChange = cbsAfterChange;
 
         Init();
     }
@@ -52,7 +90,15 @@ public class UNBehavior:UNBaseBehavior
     {
         base.Init();
 
+        InitStateCheckCbs();
         InitStateCbs();
+    }
+
+    private void InitStateCheckCbs()
+    {
+        m_stateCheckCbs.Add(UNBehaviorStateType.Wait, CanWait);
+        m_stateCheckCbs.Add(UNBehaviorStateType.Execute, CanExecute);
+        m_stateCheckCbs.Add(UNBehaviorStateType.Finish, CanFinish);
     }
 
     private void InitStateCbs()
@@ -62,17 +108,43 @@ public class UNBehavior:UNBaseBehavior
         m_stateCbs.Add(UNBehaviorStateType.Finish, Finish);
     }
 
+    public bool CanChangeToState(UNBehaviorStateType state)
+    {
+        return m_stateCheckCbs[state]();
+    }
+
+    protected virtual bool CanWait()
+    {
+        return true;
+    }
+
+    protected virtual bool CanExecute()
+    {
+        return true;
+    }
+
+    protected virtual bool CanFinish()
+    {
+        return true;
+    }
+
     public virtual void ChangeToState(UNBehaviorStateType state)
     {
         var oldState = m_curState;
-        if (m_cbBeforeChange != null)
+        if (m_cbsBeforeChange != null)
         {
-            m_cbBeforeChange(oldState, m_curState);
+            for (int i = 0; i < m_cbsBeforeChange.Count; ++i)
+            {
+                m_cbsBeforeChange[i](m_type, oldState, state);
+            }
         }
         m_stateCbs[state]();
-        if (m_cbAfterChange != null)
+        if (m_cbsAfterChange != null)
         {
-            m_cbAfterChange(oldState, m_curState);
+            for (int i = 0; i < m_cbsAfterChange.Count; ++i)
+            {
+                m_cbsAfterChange[i](m_type, oldState, state);
+            }
         }
     }
 
@@ -94,5 +166,10 @@ public class UNBehavior:UNBaseBehavior
     protected void Finish()
     {
         m_curState = UNBehaviorStateType.Finish;
+    }
+
+    public override void Update()
+    {
+        base.Update();
     }
 }

@@ -30,7 +30,7 @@ public class EventManager : UNManager
         m_event.DispatchEventImmediate(type, pars);
     }
 
-    protected override void Update()
+    public override void Update()
     {
         m_event.Update();
     }
