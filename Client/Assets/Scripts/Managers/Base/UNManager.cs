@@ -9,4 +9,13 @@ using System;
 
 public class UNManager:UNBaseManager
 {
+    public override void Init()
+    {
+        base.Init();
+        AddEventListeners();
+    }
+
+    protected virtual void AddEventListeners()
+    {
+    }
 }

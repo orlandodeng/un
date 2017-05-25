@@ -9,5 +9,7 @@ using System;
 
 public class UNConstants
 {
-    public static readonly bool SHOWLOG = true;
+    public static readonly bool SHOW_LOG = true;
+    public static readonly long MAX_MEMORY_SIZE = 150;
+    public static readonly long WARN_MEMORY_SIZE = 150;
 }

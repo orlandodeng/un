@@ -20,12 +20,12 @@ public class EventManager : UNManager
         m_event.AddEventListener(type, cb);
     }
 
-    public void DispatchEvent(EventType type, object[] pars)
+    public void DispatchEvent(EventType type, object[] pars = null)
     {
         m_event.DispatchEvent(type, pars);
     }
 
-    public void DispatchEventImmediate(EventType type, object[] pars)
+    public void DispatchEventImmediate(EventType type, object[] pars = null)
     {
         m_event.DispatchEventImmediate(type, pars);
     }

@@ -11,7 +11,7 @@ public class UNDebug
 {
     public static void Log(string str)
     {
-        if(!UNConstants.SHOWLOG)
+        if(!UNConstants.SHOW_LOG)
         {
             return;
         }
@@ -20,7 +20,7 @@ public class UNDebug
 
     public static void LogWarning(string str)
     {
-        if(!UNConstants.SHOWLOG)
+        if(!UNConstants.SHOW_LOG)
         {
             return;
         }
@@ -29,7 +29,7 @@ public class UNDebug
 
     public static void LogError(string str)
     {
-        if(!UNConstants.SHOWLOG)
+        if(!UNConstants.SHOW_LOG)
         {
             return;
         }

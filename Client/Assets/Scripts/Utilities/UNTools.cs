@@ -1,12 +1,12 @@
 ﻿//========================================================================
 // Copyright(C): EZFun
-// Created by : dhf at 2017/4/20 12:28:56
-// Function : Manager基类
+// Created by : dhf at 2017/5/23 18:13:26
+// Function : 
 //========================================================================
 
 using UnityEngine;
 using System;
 
-public class UNBaseManager:UNObject
+public class UNTools
 {
 }

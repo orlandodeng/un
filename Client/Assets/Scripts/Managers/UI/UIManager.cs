@@ -9,4 +9,9 @@ using System;
 
 public class UIManager:UNManager
 {
+    public static UIManager Instance;
+
+    private void ReleaseUnusedUI()
+    {
+    }
 }

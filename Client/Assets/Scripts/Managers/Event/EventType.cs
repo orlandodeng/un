@@ -5,6 +5,7 @@
 //========================================================================
 
 
-public class EventType
+public enum EventType
 {
+    MemoryWarning,
 }

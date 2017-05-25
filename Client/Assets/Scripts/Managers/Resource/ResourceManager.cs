@@ -9,4 +9,9 @@ using System;
 
 public class ResourceManager:UNManager
 {
+    public static ResourceManager Instance;
+
+    private void ReleaseUnusedResources()
+    {
+    }
 }

@@ -7,6 +7,6 @@
 using UnityEngine;
 using System;
 
-public class UNBaseMonoBehaviorObject
+public class UNBaseMonoBehaviorObject:MonoBehaviour
 {
 }
