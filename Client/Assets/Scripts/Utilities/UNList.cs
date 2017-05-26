@@ -7,7 +7,7 @@
 using System;
 using System.Collections.Generic;
 
-public class UNList<T>
+public class UNList<T>:UNObject
 {
     private Action<T> m_addCB;
     private Action<T> m_removeCB;
@@ -42,7 +42,23 @@ public class UNList<T>
         }
     }
 
-    public UNList(Action<T> addCB = null, Action<T> removeCB = null)
+    public UNList()
+    {
+    }
+
+    public static UNList<T> New<T>()
+    {
+        return ObjectManager.Instance.CreateObject<UNList<T>>();
+    }
+
+    public static UNList<T> New<T>(Action<T> addCB = null, Action<T> removeCB = null)
+    {
+        var obj = New<T>();
+        obj.Init(addCB, removeCB);
+        return obj;
+    }
+
+    public void Init(Action<T> addCB = null, Action<T> removeCB = null)
     {
         m_addCB = addCB;
         m_removeCB = removeCB;

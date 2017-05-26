@@ -13,16 +13,23 @@ public class ObjectManager:UNManager
     private UNDictionary<Type, UNList<UNObject>> m_objs;
     private UNList<UNObject> m_objGetList;
 
+    public ObjectManager()
+    {
+        Init();
+    }
+
     public override void Init()
     {
-        base.Init();
-
         Instance = this;
         m_objs = new UNDictionary<Type, UNList<UNObject>>();
-        m_objGetList = new UNList<UNObject>();
+        base.Init();
     }
 
     protected override void AddEventListeners()
+    {
+    }
+
+    public void AddEventListeners_()
     {
         base.AddEventListeners();
         EventManager.Instance.AddEventListener(EventType.MemoryWarning, OnMemoryWarning);
@@ -33,10 +40,9 @@ public class ObjectManager:UNManager
         ReleaseUnusedObjects();
     }
 
-    public T CreateObject<T>()
+    public T CreateObject<T>(params object[] pars)
         where T:UNObject,new()
     {
-        m_objGetList.Clear();
         if(m_objs.TryGetValue(typeof(T), out m_objGetList))
         {
             for (int i = 0; i < m_objGetList.Count; ++i)

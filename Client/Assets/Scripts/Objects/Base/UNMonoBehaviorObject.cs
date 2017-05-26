@@ -9,7 +9,7 @@ using System;
 
 public class UNMonoBehaviorObject:UNBaseMonoBehaviorObject
 {
-    protected EventObjecct m_event;
+    protected EventObject m_event;
     private UNObjectStateType _m_state;
     public UNObjectStateType m_state
     {

@@ -59,16 +59,26 @@ public class UNBehavior:UNBaseBehavior
     }
     private UNList<UNBehaviorChangeStateCallBack> m_cbsBeforeChange = null;
     private UNList<UNBehaviorChangeStateCallBack> m_cbsAfterChange = null;
-    private UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState> m_stateCheckCbs = new UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState>();
-    private UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState> m_stateCbs = new UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState>();
+    private UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState> m_stateCheckCbs = null;
+    private UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState> m_stateCbs = null;
 
-    public UNBehavior(UNBehaviorType bType, 
+    public UNBehavior()
+    { }
+
+    public static new UNBehavior New()
+    {
+        return ObjectManager.Instance.CreateObject<UNBehavior>();
+    }
+
+    public static UNBehavior New(UNBehaviorType bType, 
         int priority = 0,
         UNBehaviorStateType bState = UNBehaviorStateType.Wait,
         UNList<UNBehaviorChangeStateCallBack> cbsBeforeChange = null,
         UNList<UNBehaviorChangeStateCallBack> cbsAfterChange = null)
     {
-        ResetToBehavior(bType, priority, bState, cbsBeforeChange, cbsAfterChange);
+        var obj = New();
+        obj.ResetToBehavior(bType, priority, bState, cbsBeforeChange, cbsAfterChange);
+        return obj;
     }
 
     public void ResetToBehavior(UNBehaviorType bType, 
@@ -96,6 +106,10 @@ public class UNBehavior:UNBaseBehavior
 
     private void InitStateCheckCbs()
     {
+        if (m_stateCheckCbs == null)
+        {
+            m_stateCheckCbs = UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState>.New<UNBehaviorStateType, UNBehaviorCanChangeToState>();
+        }
         m_stateCheckCbs.Add(UNBehaviorStateType.Wait, CanWait);
         m_stateCheckCbs.Add(UNBehaviorStateType.Execute, CanExecute);
         m_stateCheckCbs.Add(UNBehaviorStateType.Finish, CanFinish);
@@ -103,6 +117,10 @@ public class UNBehavior:UNBaseBehavior
 
     private void InitStateCbs()
     {
+        if (m_stateCbs == null)
+        {
+            m_stateCbs = UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState>.New<UNBehaviorStateType, UNBehaviorChangeToState>();
+        }
         m_stateCbs.Add(UNBehaviorStateType.Wait, Wait);
         m_stateCbs.Add(UNBehaviorStateType.Execute, Execute);
         m_stateCbs.Add(UNBehaviorStateType.Finish, Finish);

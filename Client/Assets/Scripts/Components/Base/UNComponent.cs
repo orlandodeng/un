@@ -10,16 +10,16 @@ using un_resource;
 public class UNComponent:UNBaseComponent
 {
     // 行为转换规则 value[i] -> key
-    private UNDictionary<UNBehaviorType, UNList<UNBehaviorType>> m_behaviorsTransRules = new UNDictionary<UNBehaviorType, UNList<UNBehaviorType>>();
+    private UNDictionary<UNBehaviorType, UNList<UNBehaviorType>> m_behaviorsTransRules = null;
     // 待执行行为
-    private UNList<UNBehavior> m_behaviorsWaitForExecute = new UNList<UNBehavior>();
+    private UNList<UNBehavior> m_behaviorsWaitForExecute = null;
     // 当前行为
     private UNBehavior m_curBehavior;
     // 固定ID
     protected int m_ID;
     // 行为 切换 回调
-    private UNList<UNBehaviorChangeStateCallBack> m_cbsBeforeBehaviorChange = new UNList<UNBehaviorChangeStateCallBack>();
-    private UNList<UNBehaviorChangeStateCallBack> m_cbsAfterBehaviorChange = new UNList<UNBehaviorChangeStateCallBack>();
+    private UNList<UNBehaviorChangeStateCallBack> m_cbsBeforeBehaviorChange = null;
+    private UNList<UNBehaviorChangeStateCallBack> m_cbsAfterBehaviorChange = null;
 
     public virtual void InitWithBehavior(UNBehaviorType bType,
         int priority = 0,
@@ -35,6 +35,18 @@ public class UNComponent:UNBaseComponent
     {
         base.Init();
         InitBehaviorsTrans();
+        if (m_behaviorsWaitForExecute == null)
+        {
+            m_behaviorsWaitForExecute = UNList<UNBehavior>.New<UNBehavior>();
+        }
+        if (m_cbsBeforeBehaviorChange == null)
+        {
+            m_cbsBeforeBehaviorChange = UNList<UNBehaviorChangeStateCallBack>.New<UNBehaviorChangeStateCallBack>();
+        }
+        if (m_cbsAfterBehaviorChange == null)
+        {
+            m_cbsAfterBehaviorChange = UNList<UNBehaviorChangeStateCallBack>.New<UNBehaviorChangeStateCallBack>();
+        }
     }
 
     // 初始化行为转换规则
@@ -45,6 +57,10 @@ public class UNComponent:UNBaseComponent
         {
             UNDebug.LogError("no this behavior " + m_ID);
             return;
+        }
+        if (m_behaviorsTransRules == null)
+        {
+            m_behaviorsTransRules = UNDictionary<UNBehaviorType, UNList<UNBehaviorType>>.New<UNBehaviorType, UNList<UNBehaviorType>>();
         }
         for (int i = 0; i < tableData.trans.Count; ++i)
         {
@@ -154,7 +170,8 @@ public class UNComponent:UNBaseComponent
         m_cbsAfterBehaviorChange.Add(cbAfterChange);
         if (m_curBehavior == null)
         {
-            m_curBehavior = new UNBehavior(bType, priority, bState, m_cbsBeforeBehaviorChange, m_cbsAfterBehaviorChange);
+            m_curBehavior = UNBehavior.New();
+            m_curBehavior.ResetToBehavior(bType, priority, bState, m_cbsBeforeBehaviorChange, m_cbsAfterBehaviorChange);
         }
         else
         {
@@ -172,7 +189,7 @@ public class UNComponent:UNBaseComponent
     {
         m_cbsBeforeBehaviorChange.Add(cbBeforeChange);
         m_cbsAfterBehaviorChange.Add(cbAfterChange);
-        AddWaitBehavior(new UNBehavior(bType, priority, bState, m_cbsBeforeBehaviorChange, m_cbsAfterBehaviorChange));
+        AddWaitBehavior(UNBehavior.New(bType, priority, bState, m_cbsBeforeBehaviorChange, m_cbsAfterBehaviorChange));
     }
 
     public void AddWaitBehavior(UNBehavior behavior)
@@ -203,7 +220,7 @@ public class UNComponent:UNBaseComponent
         }
         else
         {
-            fromList = new UNList<UNBehaviorType>();
+            fromList = UNList<UNBehaviorType>.New<UNBehaviorType>();
         }
         if (fromList != null)
         {

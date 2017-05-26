@@ -16,7 +16,7 @@ public enum UNObjectStateType
 
 public class UNObject:UNBaseObject
 {
-    protected EventObjecct m_event;
+    protected EventObject m_event;
     private UNObjectStateType _m_state;
     public UNObjectStateType m_state
     {
@@ -28,6 +28,17 @@ public class UNObject:UNBaseObject
         {
             _m_state = value;
         }
+    }
+
+    public UNObject()
+    {
+    }
+
+    public static UNObject New()
+    {
+        var obj = ObjectManager.Instance.CreateObject<UNObject>();
+        obj.Init();
+        return obj;
     }
 
     public virtual void Init()

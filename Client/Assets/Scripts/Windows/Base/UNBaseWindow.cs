@@ -1,12 +1,12 @@
 ﻿//========================================================================
 // Copyright(C): EZFun
-// Created by : dhf at 2017/5/9 17:36:55
-// Function : UI类型
+// Created by : dhf at 2017/5/9 16:56:31
+// Function : 
 //========================================================================
 
 using UnityEngine;
 using System;
 
-public class UIType
+public class UNBaseWindow:UNMonoBehaviorObject
 {
 }

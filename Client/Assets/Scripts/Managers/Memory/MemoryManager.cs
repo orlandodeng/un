@@ -28,7 +28,7 @@ public class MemoryManager:UNManager
         return 0;
     }
 
-    public void ClearMemory()
+    public void MemoryWarning()
     {
         EventManager.Instance.DispatchEventImmediate(EventType.MemoryWarning);
     }
@@ -39,7 +39,7 @@ public class MemoryManager:UNManager
         {
             return;
         }
-        ClearMemory();
+        MemoryWarning();
     }
 
     public override void Update()

@@ -8,7 +8,7 @@ using UnityEngine;
 /// <summary>
 /// 线程安全
 /// </summary>
-public class UNValue
+public class UNValue:UNObject
 {
     private UNValue()
 	{

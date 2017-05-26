@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-public class UNDictionary<TKey, TValue>
+public class UNDictionary<TKey, TValue>:UNObject
 {
     private Action<TKey, TValue> m_addCB;
     private Action<TKey, TValue> m_removeCB;
@@ -56,12 +56,28 @@ public class UNDictionary<TKey, TValue>
         }
     }
 
-    public UNDictionary(Action<TKey, TValue> addCB = null, Action<TKey, TValue> removeCB = null)
+    public UNDictionary()
+    { }
+
+    public static UNDictionary<TKey, TValue> New<TKey, TValue>()
+    {
+        return ObjectManager.Instance.CreateObject<UNDictionary<TKey, TValue>>();
+    }
+
+    public static UNDictionary<TKey, TValue> New<TKey, TValue>(Action<TKey, TValue> addCB = null, Action<TKey, TValue> removeCB = null)
+    {
+        var obj = New<TKey, TValue>();
+        obj.Init(addCB, removeCB);
+        return obj;
+    }
+
+    public void Init(Action<TKey, TValue> addCB = null, Action<TKey, TValue> removeCB = null)
     {
         m_addCB = addCB;
         m_removeCB = removeCB;
     }
-    public UNDictionary(Dictionary<TKey, TValue> dictionary)
+
+    public void Init(Dictionary<TKey, TValue> dictionary)
     {
         List<TKey> keys = new List<TKey>(dictionary.Keys);
         m_dict = dictionary;

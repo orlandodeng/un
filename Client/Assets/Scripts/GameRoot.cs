@@ -5,12 +5,13 @@
 //========================================================================
 
 using System;
+using System.Reflection;
 using UnityEngine;
 
 public class GameRoot : MonoBehaviour
 {
-
-	private UNDictionary<Type, UNManager> m_managers = new UNDictionary<Type, UNManager> ();
+    private ObjectManager m_objMgr;
+	private UNDictionary<Type, UNManager> m_managers;
 
 	// Use this for initialization
 	private void Start ()
@@ -19,7 +20,13 @@ public class GameRoot : MonoBehaviour
 			DestroyEnvironment ();
 			return;
 		}
+
+        m_managers = new UNDictionary<Type, UNManager>();
+        m_objMgr = new ObjectManager();
+        
 		LoadModules ();
+
+        m_objMgr.AddEventListeners_();
 	}
 
 	private bool InitEnvironment ()
@@ -43,8 +50,8 @@ public class GameRoot : MonoBehaviour
 
 	private void LoadGameManagers ()
 	{
-		LoadGameManager<EventManager> ();
-		LoadGameManager<TableManager> ();
+		LoadGameManager<EventManager>();
+		LoadGameManager<TableManager>();
 	}
 
 	private void LoadLogicSystems ()

@@ -13,6 +13,8 @@ public class EventManager : UNManager
     {
         base.Init();
         Instance = this;
+        m_event = EventObject.New();
+        m_event.Init();
     }
 
     public void AddEventListener(EventType type, EventCallBack cb)

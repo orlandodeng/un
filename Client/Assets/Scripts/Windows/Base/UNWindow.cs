@@ -6,7 +6,7 @@
 
 using System;
 
-public class UNView:UNBaseView
+public class UNWindow:UNBaseWindow
 {
 }
 

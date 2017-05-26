@@ -8,17 +8,32 @@ using UnityEngine;
 using System;
 
 public delegate void EventCallBack(params object[] pars);
-public class EventObjecct:UNObject
+public class EventObject:UNObject
 {
-    public UNDictionary<EventType, UNList<EventCallBack>> m_listeners = new UNDictionary<EventType, UNList<EventCallBack>>();
-    public UNDictionary<EventType, UNList<object[]>> m_triggers = new UNDictionary<EventType, UNList<object[]>>();
+    public UNDictionary<EventType, UNList<EventCallBack>> m_listeners;
+    public UNDictionary<EventType, UNList<object[]>> m_triggers;
+
+    public static new EventObject New()
+    {
+        var obj = ObjectManager.Instance.CreateObject<EventObject>();
+        obj.Init();
+        return obj;
+    }
+
+    public override void Init()
+    {
+        base.Init();
+
+        m_listeners = UNDictionary<EventType, UNList<EventCallBack>>.New<EventType, UNList<EventCallBack>>();
+        m_triggers = UNDictionary<EventType, UNList<object[]>>.New<EventType, UNList<object[]>>();
+    }
 
     public void AddEventListener(EventType type, EventCallBack cb)
     {
         UNList<EventCallBack> cbs = null;
         if (!m_listeners.TryGetValue(type, out cbs))
         {
-            cbs = new UNList<EventCallBack>();
+            cbs = UNList<EventCallBack>.New<EventCallBack>();
             m_listeners.Add(type, cbs);
         }
         cbs.Add(cb);
@@ -29,7 +44,7 @@ public class EventObjecct:UNObject
         UNList<object[]> objs = null;
         if (!m_triggers.TryGetValue(type, out objs))
         {
-            objs = new UNList<object[]>();
+            objs = UNList<object[]>.New<object[]>();
             m_triggers.Add(type, objs);
         }
         objs.Add(pars);
@@ -60,11 +75,6 @@ public class EventObjecct:UNObject
         for (int i = 0; i < m_triggers.Count; ++i)
         {
             var type = m_triggers.GetKey(i);
-            if (type == null)
-            {
-                m_triggers.Remove(type);
-                continue;
-            }
             if (!m_listeners.ContainsKey(type))
             {
                 continue;
