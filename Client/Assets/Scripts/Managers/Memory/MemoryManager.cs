@@ -9,6 +9,14 @@ using System;
 
 public class MemoryManager:UNManager
 {
+    static public MemoryManager Instance;
+
+    public override void Init()
+    {
+        base.Init();
+        Instance = this;
+    }
+
     public void AllocMemory()
     {
     }

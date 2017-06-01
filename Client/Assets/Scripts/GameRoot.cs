@@ -51,6 +51,7 @@ public class GameRoot : MonoBehaviour
 	private void LoadGameManagers ()
 	{
 		LoadGameManager<EventManager>();
+		LoadGameManager<MemoryManager>();
 		LoadGameManager<TableManager>();
 	}
 

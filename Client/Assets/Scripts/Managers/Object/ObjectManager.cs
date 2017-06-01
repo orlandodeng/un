@@ -1,10 +1,9 @@
 ﻿//========================================================================
 // Copyright(C): EZFun
 // Created by : dhf at 2017/5/25 16:48:22
-// Function : 
+// Function : 管理自定义C#类型，控制mono堆的增长
 //========================================================================
 
-using UnityEngine;
 using System;
 
 public class ObjectManager:UNManager
