@@ -46,14 +46,14 @@ public class UNList<T>:UNObject
     {
     }
 
-    public static UNList<T> New<T>()
+    public static new UNList<T> New()
     {
         return ObjectManager.Instance.CreateObject<UNList<T>>();
     }
 
-    public static UNList<T> New<T>(Action<T> addCB = null, Action<T> removeCB = null)
+    public static UNList<T> New(Action<T> addCB = null, Action<T> removeCB = null)
     {
-        var obj = New<T>();
+        var obj = New();
         obj.Init(addCB, removeCB);
         return obj;
     }

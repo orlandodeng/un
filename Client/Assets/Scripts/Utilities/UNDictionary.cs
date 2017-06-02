@@ -59,14 +59,14 @@ public class UNDictionary<TKey, TValue>:UNObject
     public UNDictionary()
     { }
 
-    public static UNDictionary<TKey, TValue> New<TKey, TValue>()
+    public static new UNDictionary<TKey, TValue> New()
     {
         return ObjectManager.Instance.CreateObject<UNDictionary<TKey, TValue>>();
     }
 
-    public static UNDictionary<TKey, TValue> New<TKey, TValue>(Action<TKey, TValue> addCB = null, Action<TKey, TValue> removeCB = null)
+    public static UNDictionary<TKey, TValue> New(Action<TKey, TValue> addCB = null, Action<TKey, TValue> removeCB = null)
     {
-        var obj = New<TKey, TValue>();
+        var obj = New();
         obj.Init(addCB, removeCB);
         return obj;
     }
