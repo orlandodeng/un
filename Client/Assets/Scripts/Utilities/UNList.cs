@@ -28,7 +28,7 @@ public class UNList<T>:UNObject
 
     private void NullCheck()
     {
-        if(_m_list == null)
+        if(_m_list.IsNull())
         {
             _m_list = new List<T>();
         }
@@ -66,7 +66,7 @@ public class UNList<T>:UNObject
 
     public static explicit operator UNList<T>(List<T> list)
     {
-        if (list == null)
+        if (list.IsNull())
         {
             return null;
         }
@@ -198,5 +198,13 @@ public class UNList<T>:UNObject
     public T[] ToArray()
     {
         return m_list.ToArray();
+    }
+
+    public override void Release()
+    {
+        base.Release();
+        Clear();
+        m_addCB = null;
+        m_removeCB = null;
     }
 }

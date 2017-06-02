@@ -106,9 +106,9 @@ public class UNBehavior:UNBaseBehavior
 
     private void InitStateCheckCbs()
     {
-        if (m_stateCheckCbs == null)
+        if (m_stateCheckCbs.IsNull())
         {
-            m_stateCheckCbs = UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState>.New<UNBehaviorStateType, UNBehaviorCanChangeToState>();
+            m_stateCheckCbs = UNDictionary<UNBehaviorStateType, UNBehaviorCanChangeToState>.New();
         }
         m_stateCheckCbs.Add(UNBehaviorStateType.Wait, CanWait);
         m_stateCheckCbs.Add(UNBehaviorStateType.Execute, CanExecute);
@@ -117,9 +117,9 @@ public class UNBehavior:UNBaseBehavior
 
     private void InitStateCbs()
     {
-        if (m_stateCbs == null)
+        if (m_stateCbs.IsNull())
         {
-            m_stateCbs = UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState>.New<UNBehaviorStateType, UNBehaviorChangeToState>();
+            m_stateCbs = UNDictionary<UNBehaviorStateType, UNBehaviorChangeToState>.New();
         }
         m_stateCbs.Add(UNBehaviorStateType.Wait, Wait);
         m_stateCbs.Add(UNBehaviorStateType.Execute, Execute);

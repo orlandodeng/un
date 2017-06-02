@@ -24,8 +24,8 @@ public class EventObject:UNObject
     {
         base.Init();
 
-        m_listeners = UNDictionary<EventType, UNList<EventCallBack>>.New<EventType, UNList<EventCallBack>>();
-        m_triggers = UNDictionary<EventType, UNList<object[]>>.New<EventType, UNList<object[]>>();
+        m_listeners = UNDictionary<EventType, UNList<EventCallBack>>.New();
+        m_triggers = UNDictionary<EventType, UNList<object[]>>.New();
     }
 
     public void AddEventListener(EventType type, EventCallBack cb)
@@ -33,7 +33,7 @@ public class EventObject:UNObject
         UNList<EventCallBack> cbs = null;
         if (!m_listeners.TryGetValue(type, out cbs))
         {
-            cbs = UNList<EventCallBack>.New<EventCallBack>();
+            cbs = UNList<EventCallBack>.New();
             m_listeners.Add(type, cbs);
         }
         cbs.Add(cb);
@@ -44,7 +44,7 @@ public class EventObject:UNObject
         UNList<object[]> objs = null;
         if (!m_triggers.TryGetValue(type, out objs))
         {
-            objs = UNList<object[]>.New<object[]>();
+            objs = UNList<object[]>.New();
             m_triggers.Add(type, objs);
         }
         objs.Add(pars);

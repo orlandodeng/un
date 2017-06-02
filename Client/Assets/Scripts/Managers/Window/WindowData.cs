@@ -1,9 +1,9 @@
 ﻿//========================================================================
 // Copyright(C): EZFun
 // Created by : dhf at 2017/5/9 17:36:55
-// Function : UI类型
+// Function : 界面数据
 //========================================================================
 
-public class WindowType
+public class WindowData
 {
 }

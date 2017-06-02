@@ -206,7 +206,7 @@ public class TableManager:UNManager
 		where T : ProtoBuf.IExtensible 
     {
         var table = GetTable<T>();
-        if(table == null)
+        if(table.IsNull())
         {
             return;
         }
@@ -346,7 +346,8 @@ public class TableManager:UNManager
 
 	public ProtoBuf.IExtensible GetEntryFromMap(string mapName, object[] keys) {
 		List<object> list = GetListFromMap (mapName, keys);
-		if (list == null) {
+		if (list.IsNull())
+        {
 			return null;
 		}
 		MapData mapData = m_map [mapName];

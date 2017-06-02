@@ -39,7 +39,7 @@ public class ObjectManager:UNManager
         ReleaseUnusedObjects();
     }
 
-    public T CreateObject<T>(params object[] pars)
+    public T CreateObject<T>()
         where T:UNObject,new()
     {
         if(m_objs.TryGetValue(typeof(T), out m_objGetList))

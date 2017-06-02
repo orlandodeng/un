@@ -14,7 +14,7 @@ public class UNString
 
     public static string LinkString(params object[] objects)
     {
-        if (objects == null)
+        if (objects.IsNull())
         {
             return "";
         }
@@ -39,7 +39,7 @@ public class UNString
             sb.Remove(0, sb.Length);
             m_sbs_unuse.RemoveAt(0);
         }
-        if (sb == null)
+        if (sb.IsNull())
         {
             sb = new StringBuilder();
         }

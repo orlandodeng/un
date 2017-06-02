@@ -19,12 +19,19 @@ public class UNWWW:UNObject
 
     public static UNWWW New(WWW w)
     {
-        if(w == null)
+        if(w.IsNull())
         {
             return null;
         }
         var obj = ObjectManager.Instance.CreateObject<UNWWW>();
         obj.m_www = w;
         return obj;
+    }
+
+    public override void Release()
+    {
+        base.Release();
+        m_www = null;
+        m_cb = null;
     }
 }

@@ -7,6 +7,6 @@
 using UnityEngine;
 using System;
 
-public class SceneManager
+public class SceneManager:UNManager
 {
 }

@@ -37,4 +37,11 @@ public class UNPair<T1, T2>:UNObject
     {
         return ObjectManager.Instance.CreateObject<UNPair<T1, T2>>();
     }
+
+    public override void Release()
+    {
+        base.Release();
+        m_first = default(T1);
+        m_second = default(T2);
+    }
 }

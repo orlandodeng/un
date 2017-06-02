@@ -35,17 +35,17 @@ public class UNComponent:UNBaseComponent
     {
         base.Init();
         InitBehaviorsTrans();
-        if (m_behaviorsWaitForExecute == null)
+        if (m_behaviorsWaitForExecute.IsNull())
         {
-            m_behaviorsWaitForExecute = UNList<UNBehavior>.New<UNBehavior>();
+            m_behaviorsWaitForExecute = UNList<UNBehavior>.New();
         }
-        if (m_cbsBeforeBehaviorChange == null)
+        if (m_cbsBeforeBehaviorChange.IsNull())
         {
-            m_cbsBeforeBehaviorChange = UNList<UNBehaviorChangeStateCallBack>.New<UNBehaviorChangeStateCallBack>();
+            m_cbsBeforeBehaviorChange = UNList<UNBehaviorChangeStateCallBack>.New();
         }
-        if (m_cbsAfterBehaviorChange == null)
+        if (m_cbsAfterBehaviorChange.IsNull())
         {
-            m_cbsAfterBehaviorChange = UNList<UNBehaviorChangeStateCallBack>.New<UNBehaviorChangeStateCallBack>();
+            m_cbsAfterBehaviorChange = UNList<UNBehaviorChangeStateCallBack>.New();
         }
     }
 
@@ -53,14 +53,14 @@ public class UNComponent:UNBaseComponent
     public void InitBehaviorsTrans()
     {
         var tableData = TableManager.Instance.GetEntry<ResBehaviorList>(m_ID) as ResBehavior;
-        if (tableData == null)
+        if (tableData.IsNull())
         {
             UNDebug.LogError("no this behavior " + m_ID);
             return;
         }
-        if (m_behaviorsTransRules == null)
+        if (m_behaviorsTransRules.IsNull())
         {
-            m_behaviorsTransRules = UNDictionary<UNBehaviorType, UNList<UNBehaviorType>>.New<UNBehaviorType, UNList<UNBehaviorType>>();
+            m_behaviorsTransRules = UNDictionary<UNBehaviorType, UNList<UNBehaviorType>>.New();
         }
         for (int i = 0; i < tableData.trans.Count; ++i)
         {
@@ -79,7 +79,7 @@ public class UNComponent:UNBaseComponent
 
     protected void UpdateBehaviors()
     {
-        if (m_curBehavior == null)
+        if (m_curBehavior.IsNull())
         {
             UpdateWaitBehavior();
         }
@@ -114,7 +114,7 @@ public class UNComponent:UNBaseComponent
             }
         }
         m_behaviorsWaitForExecute.Clear();
-        if (behavior == null)
+        if (behavior.IsNull())
         {
             return;
         }
@@ -125,7 +125,7 @@ public class UNComponent:UNBaseComponent
     // update 当前 行为
     private void UpdateCurBehavior()
     {
-        if (m_curBehavior == null)
+        if (m_curBehavior.IsNull())
         {
             return;
         }
@@ -140,7 +140,7 @@ public class UNComponent:UNBaseComponent
     // update 新 行为
     private void UpdateNewBehavior()
     {
-        if (m_curBehavior == null)
+        if (m_curBehavior.IsNull())
         {
             return;
         }
@@ -168,7 +168,7 @@ public class UNComponent:UNBaseComponent
     {
         m_cbsBeforeBehaviorChange.Add(cbBeforeChange);
         m_cbsAfterBehaviorChange.Add(cbAfterChange);
-        if (m_curBehavior == null)
+        if (m_curBehavior.IsNull())
         {
             m_curBehavior = UNBehavior.New();
             m_curBehavior.ResetToBehavior(bType, priority, bState, m_cbsBeforeBehaviorChange, m_cbsAfterBehaviorChange);
@@ -220,7 +220,7 @@ public class UNComponent:UNBaseComponent
         }
         else
         {
-            fromList = UNList<UNBehaviorType>.New<UNBehaviorType>();
+            fromList = UNList<UNBehaviorType>.New();
         }
         if (fromList != null)
         {

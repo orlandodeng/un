@@ -53,6 +53,11 @@ public class GameRoot : MonoBehaviour
 		LoadGameManager<EventManager>();
 		LoadGameManager<MemoryManager>();
 		LoadGameManager<TableManager>();
+        LoadGameManager<VersionManager>();
+        LoadGameManager<ResourceManager>();
+        LoadGameManager<AssetsBundleManager>();
+        LoadGameManager<WindowManager>();
+        LoadGameManager<SceneManager>();
 	}
 
 	private void LoadLogicSystems ()
@@ -74,7 +79,8 @@ public class GameRoot : MonoBehaviour
         where T:UNBaseManager
 	{
 		var mgr = m_managers [typeof(T)];
-		if (mgr == null) {
+		if (mgr.IsNull())
+        {
 			return;
 		}
 		mgr.Release ();

@@ -41,7 +41,7 @@ public class UNDictionary<TKey, TValue>:UNObject
 
     private void NullCheck()
     {
-        if (_m_dict == null || _m_keys == null)
+        if (_m_dict.IsNull() || _m_keys.IsNull())
         {
             _m_dict = new Dictionary<TKey, TValue>();
             _m_keys = new List<TKey>();
@@ -54,6 +54,7 @@ public class UNDictionary<TKey, TValue>:UNObject
         {
             return m_dict.Count;
         }
+        private set { }
     }
 
     public UNDictionary()
@@ -194,7 +195,7 @@ public class UNDictionary<TKey, TValue>:UNObject
 
     public void CopyTo(ref UNDictionary<TKey, TValue> toDict)
     {
-       if(toDict == null)
+       if(toDict.IsNull())
        {
            toDict = new UNDictionary<TKey, TValue>();
        }
@@ -235,5 +236,13 @@ public class UNDictionary<TKey, TValue>:UNObject
     public Dictionary<TKey, TValue>.Enumerator GetEnumerator()
     {
         return m_dict.GetEnumerator();
+    }
+
+    public override void Release()
+    {
+        base.Release();
+        Clear();
+        m_addCB = null;
+        m_removeCB = null;
     }
 }

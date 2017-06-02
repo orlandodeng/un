@@ -7,7 +7,7 @@
 using UnityEngine;
 using System.IO;
 
-public class UNUtilities
+public static class UNUtilities
 {
     // 只读路径
     public static string StreamingAssetsPath
@@ -69,5 +69,24 @@ public class UNUtilities
             file.Dispose();
         }
         return b;
+    }
+}
+public static class NullUtil
+{
+    public static bool IsNull(this System.Object o)
+    {
+        return o == null;
+    }
+    public static bool IsNotNull(this System.Object o)
+    {
+        return o != null;
+    }
+    public static bool IsNull(this UnityEngine.Object o)
+    {
+        return o == null;
+    }
+    public static bool IsNotNull(this UnityEngine.Object o)
+    {
+        return o != null;
     }
 }
